@@ -25,6 +25,9 @@ var reports = require("../appmodule/schoolapi/reports.js");
 var dashboard = require("../appmodule/schoolapi/dashboard.js");
 var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
 
+var mrktnorder = require("../appmodule/marketing/order.js");
+var mrktndb = require("../appmodule/marketing/dashboard.js");
+
 var multer = require('multer');
 
 var upload = multer({
@@ -188,6 +191,22 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getSpeedVialationReports", reports.getSpeedVialationReports);
 
     //##################################### Reports ###################################################
+
+    //##################################### Marketing Order #####################################################
+
+    app.post(globals.globvar.marketapi + "/saveOrderInfo", mrktnorder.saveOrderInfo);
+    app.post(globals.globvar.marketapi + "/updateOrderInfo", mrktnorder.updateOrderInfo);
+    app.post(globals.globvar.marketapi + "/getOrderDetail", mrktnorder.getOrderDetail);
+    app.post(globals.globvar.marketapi + "/getOrder", mrktnorder.getOrder);
+
+    //##################################### Marketing Order #####################################################
+
+    //##################################### Marketing Dashboard #######################################
+
+    app.post(globals.globvar.rootAPI + "/getMarketingDB", mrktndb.getMarketingDB);
+
+    //##################################### Marketing Dashboard #######################################
+
 
     //##################################### VIVEK #####################################################
 
