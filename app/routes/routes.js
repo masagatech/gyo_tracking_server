@@ -13,7 +13,7 @@ var stops = require("../appmodule/schoolapi/stops.js");
 var school = require("../appmodule/schoolapi/school.js");
 var holiday = require("../appmodule/schoolapi/holiday.js");
 var batch = require("../appmodule/schoolapi/batch.js");
-var driver = require("../appmodule/schoolapi/driver.js");
+var emp = require("../appmodule/schoolapi/employee.js");
 var vehicle = require("../appmodule/schoolapi/vehicle.js");
 var user = require("../appmodule/schoolapi/user.js");
 var student = require("../appmodule/schoolapi/student.js");
@@ -22,9 +22,10 @@ var breakdown = require("../appmodule/schoolapi/breakdown.js");
 var speed = require("../appmodule/schoolapi/speed.js");
 var reports = require("../appmodule/schoolapi/reports.js");
 
-var dashboard = require("../appmodule/schoolapi/dashboard.js");
-var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
+var empgrpmap = require("../appmodule/schoolapi/empgroupmap.js");
+var onrgrpmap = require("../appmodule/schoolapi/onrgroupmap.js");
 
+var dashboard = require("../appmodule/schoolapi/dashboard.js");
 
 var multer = require('multer');
 
@@ -37,7 +38,7 @@ var upload = multer({
 });
 
 var appRouter = function(app) {
-    //##################################### API Details / #############################################
+    //##################################### API Details / ############################################
 
     var APIInfo = {
         ver: "1.0",
@@ -51,10 +52,10 @@ var appRouter = function(app) {
         rs.resp(res, 200, APIInfo);
     });
 
-    //##################################### API Details / #############################################
+    //##################################### API Details / ############################################
 
 
-    //##################################### VIVEK #####################################################
+    //##################################### VIVEK ####################################################
 
     //##################################### Login ####################################################
 
@@ -64,28 +65,28 @@ var appRouter = function(app) {
 
     //##################################### Login ####################################################
 
-    //##################################### File Upload ####################################################
+    //##################################### File Upload ##############################################
 
     app.post(globals.globvar.rootAPI + "/uploads", fileupload.uploadFile);
     // app.get(globals.globvar.rootAPI + "/getFilePath", fileupload.getFilePath);
 
-    //##################################### File Upload ####################################################
+    //##################################### File Upload ##############################################
 
-    //##################################### Workspace ####################################################
+    //##################################### Workspace ################################################
 
     app.post(globals.globvar.rootAPI + "/getWorkspaceDetails", workspace.getWorkspaceDetails);
     app.post(globals.globvar.rootAPI + "/saveWorkspaceInfo", workspace.saveWorkspaceInfo);
 
     //##################################### Login ####################################################
 
-    //##################################### Menu ####################################################
+    //##################################### Menu #####################################################
 
     app.post(globals.globvar.rootAPI + "/getMenuDetails", menu.getMenuDetails);
     app.post(globals.globvar.rootAPI + "/getMenuAccess", menu.getMenuAccess);
 
-    //##################################### Menu ####################################################
+    //##################################### Menu #####################################################
 
-    //##################################### Common ####################################################
+    //##################################### Common ###################################################
 
     app.get(globals.globvar.rootAPI + "/getAutoData", common.getAutoData);
     app.post(globals.globvar.rootAPI + "/getDropDownData", common.getDropDownData);
@@ -93,14 +94,14 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getDashboard", common.getDashboard);
     app.post(globals.globvar.rootAPI + "/getMOM", common.getMOM);
 
-    //##################################### Common ####################################################
+    //##################################### Common ###################################################
 
-    //##################################### Location ####################################################
+    //##################################### Location #################################################
 
     app.post(globals.globvar.rootAPI + "/saveLocationInfo", location.saveLocationInfo);
     app.post(globals.globvar.rootAPI + "/getLocationDetails", location.getLocationDetails);
 
-    //##################################### Location ###################################################
+    //##################################### Location #################################################
 
     //##################################### Stops ####################################################
 
@@ -108,42 +109,42 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/saveStopsInfo", stops.saveStopsInfo);
     app.post(globals.globvar.rootAPI + "/getStopsDetails", stops.getStopsDetails);
 
-    //##################################### Stops ###################################################
+    //##################################### Stops ####################################################
 
-    //##################################### School ####################################################
+    //##################################### School ###################################################
 
     app.post(globals.globvar.rootAPI + "/saveSchoolInfo", school.saveSchoolInfo);
     app.post(globals.globvar.rootAPI + "/getSchoolDetails", school.getSchoolDetails);
 
-    //##################################### Student ###################################################
+    //##################################### Student ##################################################
 
-    //##################################### Holiday ####################################################
+    //##################################### Holiday ##################################################
 
     app.post(globals.globvar.rootAPI + "/saveHoliday", holiday.saveHoliday);
     app.post(globals.globvar.rootAPI + "/getHoliday", holiday.getHoliday);
 
-    //##################################### Holiday ###################################################
+    //##################################### Holiday ##################################################
 
-    //##################################### Batch #####################################################
+    //##################################### Batch ####################################################
 
     app.post(globals.globvar.rootAPI + "/saveBatchInfo", batch.saveBatchInfo);
     app.post(globals.globvar.rootAPI + "/getBatchDetails", batch.getBatchDetails);
 
-    //##################################### Batch #####################################################
+    //##################################### Batch ####################################################
 
-    //##################################### Driver ####################################################
+    //##################################### employee #################################################
 
-    app.post(globals.globvar.rootAPI + "/saveDriverInfo", driver.saveDriverInfo);
-    app.post(globals.globvar.rootAPI + "/getDriverDetails", driver.getDriverDetails);
+    app.post(globals.globvar.rootAPI + "/saveEmployeeInfo", emp.saveEmployeeInfo);
+    app.post(globals.globvar.rootAPI + "/getEmployeeDetails", emp.getEmployeeDetails);
 
-    //##################################### Driver ####################################################
+    //##################################### employee #################################################
 
-    //##################################### Vehicle ####################################################
+    //##################################### Vehicle ##################################################
 
     app.post(globals.globvar.rootAPI + "/saveVehicleInfo", vehicle.saveVehicleInfo);
     app.post(globals.globvar.rootAPI + "/getVehicleDetails", vehicle.getVehicleDetails);
 
-    //##################################### Driver ####################################################
+    //##################################### employee #################################################
 
     //##################################### User #####################################################
 
@@ -155,50 +156,54 @@ var appRouter = function(app) {
 
     //##################################### User #####################################################
 
-    //##################################### Student ###################################################
+    //##################################### Student ##################################################
 
     app.post(globals.globvar.rootAPI + "/saveStudentInfo", student.saveStudentInfo);
     app.post(globals.globvar.rootAPI + "/getStudentDetails", student.getStudentDetails);
 
-    //##################################### Student ###################################################
+    //##################################### Student ##################################################
 
-    //##################################### Pick and Drop #############################################
+    //##################################### Pick and Drop ############################################
 
     app.post(globals.globvar.rootAPI + "/savePickDropInfo", pickdrop.savePickDropInfo);
     app.post(globals.globvar.rootAPI + "/getPickDropDetails", pickdrop.getPickDropDetails);
 
-    //##################################### Pick and Drop #############################################
+    //##################################### Pick and Drop ############################################
 
     //##################################### Break Down ###############################################
 
     app.post(globals.globvar.rootAPI + "/saveBreakDown", breakdown.saveBreakDown);
     app.post(globals.globvar.rootAPI + "/getBreakDown", breakdown.getBreakDown);
 
-    //##################################### Driver Info ################################################
+    //##################################### employee Info ############################################
 
-    //##################################### Speed ###############################################
+    //##################################### Speed ####################################################
 
     app.post(globals.globvar.rootAPI + "/saveSpeedVialation", speed.saveSpeedVialation);
 
-    //##################################### Speed ################################################
+    //##################################### Speed ####################################################
 
-    //##################################### Reports ###################################################
+    //##################################### Reports ############################################################
 
     app.post(globals.globvar.rootAPI + "/getAttendanceReports", reports.getAttendanceReports);
     app.post(globals.globvar.rootAPI + "/getRouteWisePassengerReports", reports.getRouteWisePassengerReports);
     app.post(globals.globvar.rootAPI + "/getSpeedVialationReports", reports.getSpeedVialationReports);
 
-    //##################################### Reports ###################################################
+    //##################################### Reports #############################################################
 
-    //##################################### Marketing Order #####################################################
+    //##################################### Employee Group Mapping ##############################################
 
+    app.post(globals.globvar.rootAPI + "/saveEmpGroupMap", empgrpmap.saveEmpGroupMap);
+    app.post(globals.globvar.rootAPI + "/getEmpGroupMap", empgrpmap.getEmpGroupMap);
 
+    //##################################### Employee Group Mapping #######################################################
 
-    //##################################### Marketing Order #####################################################
+    //##################################### Owner Group Mapping ##############################################
 
-    //##################################### Marketing Dashboard #######################################
+    app.post(globals.globvar.rootAPI + "/saveOwnerGroupMap", onrgrpmap.saveOwnerGroupMap);
+    app.post(globals.globvar.rootAPI + "/getOwnerGroupMap", onrgrpmap.getOwnerGroupMap);
 
-    //##################################### Marketing Dashboard #######################################
+    //##################################### Owner Group Mapping #######################################################
 
 
     //##################################### VIVEK #####################################################
@@ -212,14 +217,6 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getDashboard", dashboard.getDashboard);
 
     //##################################### Dashboard #################################################
-
-    //##################################### Driver Info ###############################################
-
-    app.post(globals.globvar.rootAPI + "/saveDriverInfo", driverinfo.saveDriverInfo);
-    app.post(globals.globvar.rootAPI + "/getDriverInfoGrid", driverinfo.getDriverInfoGrid);
-    app.post(globals.globvar.rootAPI + "/getDriverInfoDetails", driverinfo.getDriverInfoDetails);
-
-    //##################################### Driver Info ################################################
 
     //##################################### File Uploads ###############################################
 
