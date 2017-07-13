@@ -13,7 +13,6 @@ var stops = require("../appmodule/schoolapi/stops.js");
 var school = require("../appmodule/schoolapi/school.js");
 var holiday = require("../appmodule/schoolapi/holiday.js");
 var batch = require("../appmodule/schoolapi/batch.js");
-var emp = require("../appmodule/schoolapi/employee.js");
 var vehicle = require("../appmodule/schoolapi/vehicle.js");
 var user = require("../appmodule/schoolapi/user.js");
 var student = require("../appmodule/schoolapi/student.js");
@@ -21,10 +20,6 @@ var pickdrop = require("../appmodule/schoolapi/pickdrop.js");
 var breakdown = require("../appmodule/schoolapi/breakdown.js");
 var speed = require("../appmodule/schoolapi/speed.js");
 var reports = require("../appmodule/schoolapi/reports.js");
-
-var empgrpmap = require("../appmodule/schoolapi/empgroupmap.js");
-var onrgrpmap = require("../appmodule/schoolapi/onrgroupmap.js");
-var group = require("../appmodule/schoolapi/group.js");
 
 var dashboard = require("../appmodule/schoolapi/dashboard.js");
 var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
@@ -135,13 +130,6 @@ var appRouter = function(app) {
 
     //##################################### Batch ##############################################################
 
-    //##################################### employee #################################################
-
-    app.post(globals.globvar.rootAPI + "/saveEmployeeInfo", emp.saveEmployeeInfo);
-    app.post(globals.globvar.rootAPI + "/getEmployeeDetails", emp.getEmployeeDetails);
-
-    //##################################### employee #################################################
-
     //##################################### Vehicle ############################################################
 
     app.post(globals.globvar.rootAPI + "/saveVehicleInfo", vehicle.saveVehicleInfo);
@@ -194,34 +182,7 @@ var appRouter = function(app) {
 
     //##################################### Reports #############################################################
 
-    //##################################### Employee Group Mapping ##############################################
-
-    app.post(globals.globvar.rootAPI + "/saveEmpGroupMap", empgrpmap.saveEmpGroupMap);
-    app.post(globals.globvar.rootAPI + "/getEmpGroupMap", empgrpmap.getEmpGroupMap);
-
-    //##################################### Employee Group Mapping ##############################################
-
-    //##################################### Owner Group Mapping #################################################
-
-    app.post(globals.globvar.rootAPI + "/saveOwnerGroupMap", onrgrpmap.saveOwnerGroupMap);
-    app.post(globals.globvar.rootAPI + "/getOwnerGroupMap", onrgrpmap.getOwnerGroupMap);
-
-    //##################################### Owner Group Mapping #################################################
-
     //##################################### VIVEK ###############################################################
-
-
-    //##################################### Harshala ############################################################
-
-    //##################################### Group ###############################################################
-
-    app.post(globals.globvar.rootAPI + "/saveGroupInfo", group.saveGroupInfo);
-    app.post(globals.globvar.rootAPI + "/getGroupDetails", group.getGroupDetails);
-
-    //##################################### Group ###############################################################
-
-    //##################################### Harshala ############################################################
-
 
 
     //##################################### PRATIK ##############################################################

@@ -5,7 +5,7 @@ var globals = require("gen").globals;
 var employee = module.exports = {};
 
 employee.saveEmployeeInfo = function saveEmployeeInfo(req, res, done) {
-    db.callFunction("select " + globals.schema("funsave_employeeinfo") + "($1::json);", [req.body], function(data) {
+    db.callFunction("select " + globals.track("funsave_employeeinfo") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
@@ -13,7 +13,7 @@ employee.saveEmployeeInfo = function saveEmployeeInfo(req, res, done) {
 }
 
 employee.getEmployeeDetails = function getEmployeeDetails(req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_employeedetails") + "($1,$2::json);", ['emp', req.body], function(data) {
+    db.callProcedure("select " + globals.track("funget_employeedetails") + "($1,$2::json);", ['emp', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

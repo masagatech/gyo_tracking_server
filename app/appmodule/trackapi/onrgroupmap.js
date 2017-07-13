@@ -7,7 +7,7 @@ var onrgrpmap = module.exports = {};
 // Employee Group Mapping
 
 onrgrpmap.saveOwnerGroupMap = function saveOwnerGroupMap(req, res, done) {
-    db.callFunction("select " + globals.schema("funsave_onrgroupmap") + "($1::json);", [req.body], function(data) {
+    db.callFunction("select " + globals.track("funsave_onrgroupmap") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
@@ -15,7 +15,7 @@ onrgrpmap.saveOwnerGroupMap = function saveOwnerGroupMap(req, res, done) {
 }
 
 onrgrpmap.getOwnerGroupMap = function getOwnerGroupMap(req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_onrgroupmap") + "($1,$2::json);", ['egm', req.body], function(data) {
+    db.callProcedure("select " + globals.track("funget_onrgroupmap") + "($1,$2::json);", ['egm', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
