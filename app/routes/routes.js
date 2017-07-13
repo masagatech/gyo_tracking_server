@@ -13,7 +13,7 @@ var stops = require("../appmodule/schoolapi/stops.js");
 var school = require("../appmodule/schoolapi/school.js");
 var holiday = require("../appmodule/schoolapi/holiday.js");
 var batch = require("../appmodule/schoolapi/batch.js");
-var driver = require("../appmodule/schoolapi/driver.js");
+var emp = require("../appmodule/schoolapi/employee.js");
 var vehicle = require("../appmodule/schoolapi/vehicle.js");
 var user = require("../appmodule/schoolapi/user.js");
 var student = require("../appmodule/schoolapi/student.js");
@@ -135,19 +135,19 @@ var appRouter = function(app) {
 
     //##################################### Batch ##############################################################
 
-    //##################################### Driver #############################################################
+    //##################################### employee #################################################
 
-    app.post(globals.globvar.rootAPI + "/saveDriverInfo", driver.saveDriverInfo);
-    app.post(globals.globvar.rootAPI + "/getDriverDetails", driver.getDriverDetails);
+    app.post(globals.globvar.rootAPI + "/saveEmployeeInfo", emp.saveEmployeeInfo);
+    app.post(globals.globvar.rootAPI + "/getEmployeeDetails", emp.getEmployeeDetails);
 
-    //##################################### Driver #############################################################
+    //##################################### employee #################################################
 
     //##################################### Vehicle ############################################################
 
     app.post(globals.globvar.rootAPI + "/saveVehicleInfo", vehicle.saveVehicleInfo);
     app.post(globals.globvar.rootAPI + "/getVehicleDetails", vehicle.getVehicleDetails);
 
-    //##################################### Driver #############################################################
+    //##################################### Vehicle #############################################################
 
     //##################################### User ###############################################################
 
