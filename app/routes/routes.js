@@ -22,6 +22,8 @@ var breakdown = require("../appmodule/schoolapi/breakdown.js");
 var speed = require("../appmodule/schoolapi/speed.js");
 var reports = require("../appmodule/schoolapi/reports.js");
 
+var group = require("../appmodule/schoolapi/group.js");
+
 var dashboard = require("../appmodule/schoolapi/dashboard.js");
 var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
 
@@ -220,6 +222,25 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getDriverInfoDetails", driverinfo.getDriverInfoDetails);
 
     //##################################### Driver Info ################################################
+
+
+
+    //##################################### Harshala ####################################################
+
+    
+    //##################################### Group ####################################################
+
+    app.post(globals.globvar.rootAPI + "/saveGroupInfo", group.saveGroupInfo);
+    app.get(globals.globvar.rootAPI + "/getGroupDetails", group.getGroupDetails);
+
+    //##################################### Group ####################################################
+
+
+
+
+    //##################################### Harshala ####################################################
+
+    
 
     //##################################### File Uploads ###############################################
 
