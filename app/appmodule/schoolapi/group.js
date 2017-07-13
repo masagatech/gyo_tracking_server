@@ -13,7 +13,7 @@ group.saveGroupInfo = function saveGroupInfo(req, res, done) {
 }
 
 group.getGroupDetails = function getGroupDetails(req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_groupdetails") + "($1,$2::json);", ['drv', req.query], function(data) {
+    db.callProcedure("select " + globals.schema("funget_groupdetails") + "($1,$2::json);", ['drv', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

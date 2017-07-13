@@ -216,7 +216,7 @@ var appRouter = function(app) {
     //##################################### Group ###############################################################
 
     app.post(globals.globvar.rootAPI + "/saveGroupInfo", group.saveGroupInfo);
-    app.get(globals.globvar.rootAPI + "/getGroupDetails", group.getGroupDetails);
+    app.post(globals.globvar.rootAPI + "/getGroupDetails", group.getGroupDetails);
 
     //##################################### Group ###############################################################
 
