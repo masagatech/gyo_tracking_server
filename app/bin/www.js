@@ -13,6 +13,9 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var path = require('path');
 
+var jwt = require('express-jwt');
+var rs = require("gen").res;
+
 var socketserver = require("./socketserver.js"); //socket server for instant message
 socketserver.io = io;
 socketserver.start();
@@ -20,11 +23,11 @@ socketserver.start();
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-console.log(path.join(__dirname.replace(/\\app\\bin/gi, ""), '\\www\\uploads'));
+//console.log(path.join(__dirname.replace(/\\app\\bin/gi, ""), '\\www\\uploads'));
 
 //###############################################################################################
 
-app.all('/*', function(req, res, next) {
+app.all('/*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
 
@@ -37,21 +40,34 @@ app.all('/*', function(req, res, next) {
     }
 });
 
-app.use('/images', express.static(path.join(__dirname.replace(/\\app\\bin/gi, ""), '\\www\\uploads')));
-app.get('/chat', function(req, res) {
-    res.sendFile(__dirname.replace("\\bin", "") + '\\httpdocs\\index.html');
-    // res.send('<h1>Hello world</h1>');
+app.use(jwt({
+    secret: 'abcd',
+    credentialsRequired: false
+}));
+
+app.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+        rs.resp(res, 401, "error : Invalid Token");
+    }
 });
+
+
+app.use('/images', express.static(path.join(__dirname.replace(/\\app\\bin/gi, ""), '\\www\\uploads')));
+// app.get('/chat', function(req, res) {
+//     res.sendFile(__dirname.replace("\\bin", "") + '\\httpdocs\\index.html');
+//     // res.send('<h1>Hello world</h1>');
+// });
 
 // ##############################################################################################	
 
 var routes = require("../routes/routes.js")(app);
+var routes1 = require("../routes/track.js")(app);
 
 // ##############################################################################################
 
 // If no route is matched by now, it must be a 404
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -61,7 +77,7 @@ app.use(function(req, res, next) {
 
 // start API server
 
-var expserver = server.listen(conf.server.port, conf.server.ip, function() {
+var expserver = server.listen(conf.server.port, conf.server.ip, function () {
     console.log("API Server is listening on port %s...", expserver.address().port);
 });
 
