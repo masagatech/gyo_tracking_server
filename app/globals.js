@@ -8,7 +8,7 @@ global.schema = function schema(params) {
     return "ginv." + params;
 };
 
-global.track = function track(params) {
+global.trackschema = function track(params) {
     return "track." + params;
 };
 
