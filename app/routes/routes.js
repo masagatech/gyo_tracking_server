@@ -24,7 +24,6 @@ var reports = require("../appmodule/schoolapi/reports.js");
 var dashboard = require("../appmodule/schoolapi/dashboard.js");
 var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
 
-
 var multer = require('multer');
 
 var upload = multer({

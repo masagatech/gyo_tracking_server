@@ -1,7 +1,3 @@
-//var tripsinfo = require("../appmodule/z_apitrips/tripsinfo.js");
-// var parents = require("../appmodule/schoolapi/parents.js");
-// var notify = require("../appmodule/schoolapi/notificationapi.js");
-
 var globals = require("gen").globals;
 var rs = require("gen").rs;
 var fs = require('fs');
@@ -12,11 +8,10 @@ var empgrpmap = require("../appmodule/trackapi/empgroupmap.js");
 var onrgrpmap = require("../appmodule/trackapi/onrgroupmap.js");
 var task = require("../appmodule/trackapi/task.js");
 var ntf = require("../appmodule/trackapi/notification.js");
+var reports = require("../appmodule/trackapi/reports.js");
 
 var group = require("../appmodule/trackapi/group.js");
 var tripapi = require("../appmodule/trackapi/trips.js");
-
-
 
 var appRouter = function(app) {
     //##################################### API Details / ######################################################
@@ -39,6 +34,12 @@ var appRouter = function(app) {
 
     //##################################### VIVEK ##############################################################
 
+
+    //##################################### Reports #############################################################
+
+    app.post(globals.globvar.rootAPI + "/getGroupWiseEmployeeReports", reports.getGroupWiseEmployeeReports);
+
+    //##################################### Reports #############################################################
 
     //##################################### Employee #################################################
 
