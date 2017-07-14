@@ -8,6 +8,10 @@ global.schema = function schema(params) {
     return "ginv." + params;
 };
 
+global.trackschema = function schema(params) {
+    return "track." + params;
+};
+
 global.constr = function constr() {
     return 'postgres://postgres:123@192.168.1.108:5432/goyo_traveltrack';
 
