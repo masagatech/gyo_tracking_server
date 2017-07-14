@@ -1,16 +1,27 @@
-var rs = require("../appmodule/util/resp.js");
-var globals = require("../globals.js");
+//var tripsinfo = require("../appmodule/z_apitrips/tripsinfo.js");
+// var parents = require("../appmodule/schoolapi/parents.js");
+// var notify = require("../appmodule/schoolapi/notificationapi.js");
+
+var globals = require("gen").globals;
+var rs = require("gen").rs;
 var fs = require('fs');
+var jwt = require('express-jwt');
 
 var emp = require("../appmodule/trackapi/employee.js");
 var empgrpmap = require("../appmodule/trackapi/empgroupmap.js");
 var onrgrpmap = require("../appmodule/trackapi/onrgroupmap.js");
+<<<<<<< HEAD
 var task = require("../appmodule/trackapi/task.js");
 var ntf = require("../appmodule/trackapi/notification.js");
 
+=======
+>>>>>>> origin/master
 var group = require("../appmodule/trackapi/group.js");
+var tripapi = require("../appmodule/track/trips.js");
 
-var appRouter = function(app) {
+
+
+var appRouter = function (app) {
     //##################################### API Details / ######################################################
 
     var APIInfo = {
@@ -20,13 +31,14 @@ var appRouter = function(app) {
         responsedata: "JSON",
     }
 
-    app.post(globals.globvar.rootAPI + "/", function(req, res, done) {
+    app.post(globals.globvar.rootAPI + "/", function (req, res, done) {
         console.log(req.body)
         rs.resp(res, 200, APIInfo);
     });
 
     //##################################### API Details / ######################################################
-
+    app.post(globals.globvar.rootAPI + "/tripapi/start", tripapi.starttrip);
+    app.post(globals.globvar.rootAPI + "/tripapi/stop", tripapi.stoptrip);
 
     //##################################### VIVEK ##############################################################
 
