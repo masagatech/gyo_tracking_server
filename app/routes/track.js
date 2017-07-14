@@ -5,6 +5,8 @@ var fs = require('fs');
 var emp = require("../appmodule/trackapi/employee.js");
 var empgrpmap = require("../appmodule/trackapi/empgroupmap.js");
 var onrgrpmap = require("../appmodule/trackapi/onrgroupmap.js");
+var task = require("../appmodule/trackapi/task.js");
+var ntf = require("../appmodule/trackapi/notification.js");
 
 var group = require("../appmodule/trackapi/group.js");
 
@@ -28,12 +30,13 @@ var appRouter = function(app) {
 
     //##################################### VIVEK ##############################################################
 
-    //##################################### employee #################################################
+
+    //##################################### Employee #################################################
 
     app.post(globals.globvar.rootAPI + "/saveEmployeeInfo", emp.saveEmployeeInfo);
     app.post(globals.globvar.rootAPI + "/getEmployeeDetails", emp.getEmployeeDetails);
 
-    //##################################### employee #################################################
+    //##################################### Employee #################################################
 
     //##################################### Employee Group Mapping ##############################################
 
@@ -48,6 +51,21 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getOwnerGroupMap", onrgrpmap.getOwnerGroupMap);
 
     //##################################### Owner Group Mapping #################################################
+
+    //##################################### Allocate Task #################################################
+
+    app.post(globals.globvar.rootAPI + "/saveAllocateTask", task.saveAllocateTask);
+    app.post(globals.globvar.rootAPI + "/getAllocateTask", task.getAllocateTask);
+
+    //##################################### Allocate Task #################################################
+
+    //##################################### Notification #################################################
+
+    app.post(globals.globvar.rootAPI + "/saveNotification", ntf.saveNotification);
+    app.post(globals.globvar.rootAPI + "/getNotification", ntf.getNotification);
+
+    //##################################### Notification #################################################
+
 
     //##################################### VIVEK ###############################################################
 
