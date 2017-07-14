@@ -10,18 +10,15 @@ var jwt = require('express-jwt');
 var emp = require("../appmodule/trackapi/employee.js");
 var empgrpmap = require("../appmodule/trackapi/empgroupmap.js");
 var onrgrpmap = require("../appmodule/trackapi/onrgroupmap.js");
-<<<<<<< HEAD
 var task = require("../appmodule/trackapi/task.js");
 var ntf = require("../appmodule/trackapi/notification.js");
 
-=======
->>>>>>> origin/master
 var group = require("../appmodule/trackapi/group.js");
-var tripapi = require("../appmodule/track/trips.js");
+var tripapi = require("../appmodule/trackapi/trips.js");
 
 
 
-var appRouter = function (app) {
+var appRouter = function(app) {
     //##################################### API Details / ######################################################
 
     var APIInfo = {
@@ -31,7 +28,7 @@ var appRouter = function (app) {
         responsedata: "JSON",
     }
 
-    app.post(globals.globvar.rootAPI + "/", function (req, res, done) {
+    app.post(globals.globvar.rootAPI + "/", function(req, res, done) {
         console.log(req.body)
         rs.resp(res, 200, APIInfo);
     });
