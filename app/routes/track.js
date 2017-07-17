@@ -4,13 +4,13 @@ var fs = require('fs');
 var jwt = require('express-jwt');
 
 var emp = require("../appmodule/trackapi/employee.js");
-var empgrpmap = require("../appmodule/trackapi/empgroupmap.js");
-var onrgrpmap = require("../appmodule/trackapi/onrgroupmap.js");
+var tem = require("../appmodule/trackapi/teamempmap.js");
+var tom = require("../appmodule/trackapi/teamownermap.js");
 var task = require("../appmodule/trackapi/task.js");
 var ntf = require("../appmodule/trackapi/notification.js");
 var reports = require("../appmodule/trackapi/reports.js");
 
-var group = require("../appmodule/trackapi/group.js");
+var team = require("../appmodule/trackapi/team.js");
 var tripapi = require("../appmodule/trackapi/trips.js");
 
 var appRouter = function(app) {
@@ -51,19 +51,19 @@ var appRouter = function(app) {
 
     //##################################### Employee #################################################
 
-    //##################################### Employee Group Mapping ##############################################
+    //##################################### Team Employee Mapping ##############################################
 
-    app.post(globals.globvar.rootAPI + "/saveEmpGroupMap", empgrpmap.saveEmpGroupMap);
-    app.post(globals.globvar.rootAPI + "/getEmpGroupMap", empgrpmap.getEmpGroupMap);
+    app.post(globals.globvar.rootAPI + "/saveTeamEmployeeMap", tem.saveTeamEmployeeMap);
+    app.post(globals.globvar.rootAPI + "/getTeamEmployeeMap", tem.getTeamEmployeeMap);
 
-    //##################################### Employee Group Mapping ##############################################
+    //##################################### Team Employee Mapping ##############################################
 
-    //##################################### Owner Group Mapping #################################################
+    //##################################### Team Ownership Mapping #################################################
 
-    app.post(globals.globvar.rootAPI + "/saveOwnerGroupMap", onrgrpmap.saveOwnerGroupMap);
-    app.post(globals.globvar.rootAPI + "/getOwnerGroupMap", onrgrpmap.getOwnerGroupMap);
+    app.post(globals.globvar.rootAPI + "/saveTeamOwnershipMap", tom.saveTeamOwnershipMap);
+    app.post(globals.globvar.rootAPI + "/getTeamOwnershipMap", tom.getTeamOwnershipMap);
 
-    //##################################### Owner Group Mapping #################################################
+    //##################################### Team Ownership Mapping #################################################
 
     //##################################### Allocate Task #################################################
 
@@ -79,18 +79,17 @@ var appRouter = function(app) {
 
     //##################################### Notification #################################################
 
-
     //##################################### VIVEK ###############################################################
 
 
     //##################################### Harshala ############################################################
 
-    //##################################### Group ###############################################################
+    //##################################### Team ###############################################################
 
-    app.post(globals.globvar.rootAPI + "/saveGroupInfo", group.saveGroupInfo);
-    app.post(globals.globvar.rootAPI + "/getGroupDetails", group.getGroupDetails);
+    app.post(globals.globvar.rootAPI + "/saveTeamInfo", team.saveTeamInfo);
+    app.post(globals.globvar.rootAPI + "/getTeamDetails", team.getTeamDetails);
 
-    //##################################### Group ###############################################################
+    //##################################### Team ###############################################################
 
     //##################################### Harshala ############################################################
 }
