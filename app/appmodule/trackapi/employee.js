@@ -19,3 +19,12 @@ employee.getEmployeeDetails = function getEmployeeDetails(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+employee.getLastStatus = function getLastStatus(req, res, done) {
+    db.callFunction("select " + globals.trackschema("funget_api_getuserstate") + "($1::json);", 
+    [req.query], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}

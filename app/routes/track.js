@@ -45,6 +45,7 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/saveEmployeeInfo", emp.saveEmployeeInfo);
     app.post(globals.globvar.rootAPI + "/getEmployeeDetails", emp.getEmployeeDetails);
+    app.get(globals.globvar.rootAPI + "/getEmpStatus", emp.getLastStatus);
 
     //##################################### Employee #################################################
 
