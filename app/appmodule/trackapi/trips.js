@@ -37,3 +37,13 @@ trip.saveTripStops = function saveTripStops(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     })
 }
+
+// api for get trip stops
+
+trip.getTripStops = function getTripStops(req, res, done) {
+    db.callProcedure("select " + globals.trackschema("funget_tripstops") + "($1,$2::json);", ['ts', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}
