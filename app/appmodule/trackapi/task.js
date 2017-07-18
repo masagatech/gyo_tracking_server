@@ -19,3 +19,11 @@ task.getAllocateTask = function getAllocateTask(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+task.saveNatureTask = function saveNatureTask(req, res, done) {
+    db.callFunction("select " + globals.trackschema("funsave_tasknature") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
