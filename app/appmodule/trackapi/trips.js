@@ -47,3 +47,13 @@ trip.getTripStops = function getTripStops(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+// api for get trip stops
+
+trip.getTripReports = function getTripReports(req, res, done) {
+    db.callProcedure("select " + globals.trackschema("funget_rtp_trips") + "($1,$2::json);", ['ts', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}

@@ -34,6 +34,7 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/saveTripStops", tripapi.saveTripStops);
     app.post(globals.globvar.rootAPI + "/getTripStops", tripapi.getTripStops);
+    app.post(globals.globvar.rootAPI + "/getTripReports", tripapi.getTripReports);
 
     //##################################### VIVEK ##############################################################
 
