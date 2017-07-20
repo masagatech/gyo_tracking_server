@@ -19,6 +19,11 @@ global.constr = function constr() {
     //return 'postgres://postgres:sa@123@traveltrack.goyo.in:5432/goyo_traveltrack';
 };
 
+global.monconstr = function constr() {
+    //return 'postgres://postgres:123@192.168.1.107:5432/goyo_marketing';
+    return 'mongodb://127.0.0.1:27017/goyosch';
+};
+
 global.pgdbconnection = {
     user: 'postgres', //env var: PGUSER
     database: 'goyo_traveltrack', //env var: PGDATABASE

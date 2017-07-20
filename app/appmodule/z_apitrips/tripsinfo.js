@@ -23,8 +23,8 @@ var LocationSchema = new Schema({
     appvr: String,
     uid: String,
     pdid: Number,
-    btr:String,
-    flag:String
+    btr: String,
+    flag: String
 });
 
 mondb.mongoose.model('tripdetails', LocationSchema);
@@ -38,22 +38,20 @@ tripsinfo.createtripdetails = function(req, res, done) {
             }
         }
         var loc = req.body.loc;
-       
+
 
         mondb.mongoose.model('tripdetails').create(req.body, function(err, data) {
             if (err) {
                 //console.log(err);
-                if(res)
-                {
+                if (res) {
                     rs.resp(res, 400, err);
                 }
                 return;
             }
             //console.log(data);
-            if(res)
-                {
-                    rs.resp(res, 200, data._id);
-                }
+            if (res) {
+                rs.resp(res, 200, data._id);
+            }
             try {
                 // console.log(req.body);
                 var data = {
@@ -63,7 +61,7 @@ tripsinfo.createtripdetails = function(req, res, done) {
                     "bearng": req.body.bearing,
                     "tripid": req.body.tripid,
                     "sertm": req.body.sertm,
-                    "btr":req.body.btr
+                    "btr": req.body.btr
                 }
 
                 socketserver.io.sockets.in(req.body.tripid).emit('msgd', { "evt": "data", "data": data });
@@ -72,38 +70,38 @@ tripsinfo.createtripdetails = function(req, res, done) {
             }
         });
     } catch (ex) {
-         if(res){
+        if (res) {
             rs.resp(res, 400, ex.message);
-         }
+        }
         //console.error(ex.message);
     }
 }
 
-tripsinfo.stop =function(data1){
+tripsinfo.stop = function(data1) {
 
-data1.loc = '['+ data1.loc +']';
+    data1.loc = '[' + data1.loc + ']';
 
-    tripsinfo.createtripdetails({ body:data1 });
+    tripsinfo.createtripdetails({ body: data1 });
 
 
-    
-        if (data1) {
-            data1.loc = JSON.parse(data1.loc);
-            data1.sertm = Date.now();
-        }
-    
 
-       var data = {
-                    "lat": data1.loc[0],
-                    "lon": data1.loc[1],
-                    "speed": data1.speed,
-                    "bearng": data1.bearing,
-                    "tripid": data1.tripid,
-                    "sertm": data1.sertm,
-                    "btr":data1.btr,
-                    "flag":"stop"
-                }
-                 console.log(data);
+    if (data1) {
+        data1.loc = JSON.parse(data1.loc);
+        data1.sertm = Date.now();
+    }
+
+
+    var data = {
+        "lat": data1.loc[0],
+        "lon": data1.loc[1],
+        "speed": data1.speed,
+        "bearng": data1.bearing,
+        "tripid": data1.tripid,
+        "sertm": data1.sertm,
+        "btr": data1.btr,
+        "flag": "stop"
+    }
+    console.log(data);
     socketserver.io.sockets.in(data.tripid).emit('msgd', { "evt": "stop", "data": data });
 }
 

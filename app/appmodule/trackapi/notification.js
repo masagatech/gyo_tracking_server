@@ -4,9 +4,20 @@ var globals = require("gen").globals;
 
 var notification = module.exports = {};
 
+var tripapi = require("../schoolapi/tripapi.js");
+
 notification.saveNotification = function saveNotification(req, res, done) {
     db.callFunction("select " + globals.trackschema("funsave_notification") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
+
+        var _dtr = {
+            "flag": "tracknotify",
+            "title": req.body.title,
+            "body": req.body.msg,
+            "empid": req.body.empid
+        }
+
+        tripapi.sendNotification(_dtr);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })

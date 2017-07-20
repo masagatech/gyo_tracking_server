@@ -223,10 +223,10 @@ trip.sendNotification = function(_data, res) {
 
                     if (err) {
 
-                        //console.log("Something has gone wrong!");
+                        console.log("Something has gone wrong! ", err);
 
                     } else {
-                        //console.log("Successfully sent with response: ", response);
+                        console.log("Successfully sent with response: ", response);
 
                     }
                 });
