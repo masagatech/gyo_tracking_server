@@ -13,7 +13,7 @@ tag.savetagInfo = function savetagInfo(req, res, done) {
 }
 
 tag.gettagDetails = function gettagDetails(req, res, done) {
-    db.callProcedure("select " + globals.trackschema("funget_tagdetails") + "($1,$2::json);", ['tg', req.body], function(data) {
+    db.callProcedure("select " + globals.trackschema("funget_tagdetails") + "($1,$2::json);", ['tag', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
