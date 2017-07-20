@@ -11,6 +11,7 @@ var ntf = require("../appmodule/trackapi/notification.js");
 var reports = require("../appmodule/trackapi/reports.js");
 
 var team = require("../appmodule/trackapi/team.js");
+var tag = require("../appmodule/trackapi/tag.js");
 var tripapi = require("../appmodule/trackapi/trips.js");
 
 var appRouter = function(app) {
@@ -95,6 +96,13 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/saveTeamInfo", team.saveTeamInfo);
     app.post(globals.globvar.rootAPI + "/getTeamDetails", team.getTeamDetails);
+
+    //##################################### Team ###############################################################
+
+    //##################################### Team ###############################################################
+
+    app.post(globals.globvar.rootAPI + "/saveTagInfo", tag.saveTagInfo);
+    app.post(globals.globvar.rootAPI + "/getTagDetails", tag.getTagDetails);
 
     //##################################### Team ###############################################################
 
