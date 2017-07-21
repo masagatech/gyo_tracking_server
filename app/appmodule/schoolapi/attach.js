@@ -9,7 +9,6 @@ Attach.getAttach = function getAttach(req, res, done) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
-        // vivek
     }, 1)
 }
 
