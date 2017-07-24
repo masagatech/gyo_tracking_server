@@ -14,7 +14,7 @@ mondb.connected = false;
 
 mondb.start = function connect() {
     try {
-        mongoose.connect(mondb.constr, function(error, success) {
+        mongoose.connect(mondb.constr,{useMongoClient: true}, function(error, success) {
             console.log("connected to mongo!!!");
         });
 

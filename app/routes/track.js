@@ -13,6 +13,7 @@ var reports = require("../appmodule/trackapi/reports.js");
 var team = require("../appmodule/trackapi/team.js");
 var tag = require("../appmodule/trackapi/tag.js");
 var tripapi = require("../appmodule/trackapi/trips.js");
+var mobile = require("../appmodule/trackapi/mobile.js");
 
 var appRouter = function(app) {
     //##################################### API Details / ######################################################
@@ -107,8 +108,8 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/savePushTagInfo", tag.savePushTagInfo);
     app.post(globals.globvar.rootAPI + "/getPushTagDetails", tag.getPushTagDetails);
 
-    //##################################### Tag ###############################################################
-
+    //##################################### mobile ###############################################################
+    app.post(globals.globvar.rootAPI + "/livebeats", mobile.livebeats);
     //##################################### Harshala ############################################################
 }
 

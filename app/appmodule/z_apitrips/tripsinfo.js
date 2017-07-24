@@ -18,6 +18,7 @@ var LocationSchema = new Schema({
         index: '2d' // create the geospatial index
     },
     drvid: Number,
+    enttid: Number,
     speed: Number,
     bearing: Number,
     appvr: String,
@@ -29,7 +30,7 @@ var LocationSchema = new Schema({
 
 mondb.mongoose.model('tripdetails', LocationSchema);
 
-tripsinfo.createtripdetails = function(req, res, done) {
+tripsinfo.createtripdetails = function (req, res, done) {
     try {
         if (req.body) {
             if (req.body) {
@@ -40,7 +41,8 @@ tripsinfo.createtripdetails = function(req, res, done) {
         var loc = req.body.loc;
 
 
-        mondb.mongoose.model('tripdetails').create(req.body, function(err, data) {
+        mondb.mongoose.model('tripdetails').create(req.body, function (err, data) {
+           //  rs.resp(res, 200," data._id");
             if (err) {
                 //console.log(err);
                 if (res) {
@@ -64,9 +66,9 @@ tripsinfo.createtripdetails = function(req, res, done) {
                     "btr": req.body.btr
                 }
 
-                socketserver.io.sockets.in(req.body.tripid).emit('msgd', { "evt": "data", "data": data });
+                //socketserver.io.sockets.in(req.body.tripid).emit('msgd', { "evt": "data", "data": data });
             } catch (e) {
-
+                //rs.resp(res, 400, ex.message);
             }
         });
     } catch (ex) {
@@ -77,7 +79,7 @@ tripsinfo.createtripdetails = function(req, res, done) {
     }
 }
 
-tripsinfo.stop = function(data1) {
+tripsinfo.stop = function (data1) {
 
     data1.loc = '[' + data1.loc + ']';
 
@@ -107,10 +109,10 @@ tripsinfo.stop = function(data1) {
 
 
 
-tripsinfo.gettripdelta = function(req, res, done) {
+tripsinfo.gettripdelta = function (req, res, done) {
     var limit = req.body.limit || 1;
     var d = mondb.mongoose.model('tripdetails').find({ 'tripid': req.body.tripid }).select('tripid loc bearing sertm speed btr flag').sort({ 'sertm': -1 }).limit(limit);
-    d.exec(function(err, data) {
+    d.exec(function (err, data) {
         if (err) {
             rs.resp(res, 400, err);
             return;

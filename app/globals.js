@@ -21,7 +21,7 @@ global.constr = function constr() {
 
 global.monconstr = function constr() {
     //return 'postgres://postgres:123@192.168.1.107:5432/goyo_marketing';
-    return 'mongodb://127.0.0.1:27017/goyosch';
+    return 'mongodb://127.0.0.1:27017/gototrack';
 };
 
 global.pgdbconnection = {

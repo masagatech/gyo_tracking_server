@@ -16,6 +16,9 @@ var path = require('path');
 var jwt = require('express-jwt');
 var rs = require("gen").res;
 
+var mongo = require("../db/mongodbservice.js"); //socket server for instant message
+mongo.start();
+
 var socketserver = require("./socketserver.js"); //socket server for instant message
 socketserver.io = io;
 socketserver.start();
