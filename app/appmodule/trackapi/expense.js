@@ -13,7 +13,7 @@ exp.saveExpenseInfo = function saveExpenseInfo(req, res, done) {
 }
 
 exp.getExpenseDetails = function getExpenseDetails(req, res, done) {
-    db.callProcedure("select " + globals.trackschema("funget_expensedetails") + "($1,$2::json);", ['expm', req.body], function(data) {
+    db.callProcedure("select " + globals.trackschema("funget_expensedetails") + "($1,$2::json);", ['expnm', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
