@@ -8,6 +8,7 @@ var tem = require("../appmodule/trackapi/teamempmap.js");
 var tom = require("../appmodule/trackapi/teamownermap.js");
 var task = require("../appmodule/trackapi/task.js");
 var ntf = require("../appmodule/trackapi/notification.js");
+var exp = require("../appmodule/trackapi/expense.js");
 var reports = require("../appmodule/trackapi/reports.js");
 
 var team = require("../appmodule/trackapi/team.js");
@@ -50,6 +51,8 @@ var appRouter = function(app) {
     //##################################### Employee #################################################
 
     app.post(globals.globvar.rootAPI + "/saveEmployeeInfo", emp.saveEmployeeInfo);
+    app.post(globals.globvar.rootAPI + "/updateEmployeeInfo", emp.updateEmployeeInfo);
+
     app.post(globals.globvar.rootAPI + "/getEmployeeDetails", emp.getEmployeeDetails);
     app.get(globals.globvar.rootAPI + "/getEmpStatus", emp.getLastStatus);
 
@@ -87,6 +90,13 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getNotification", ntf.getNotification);
 
     //##################################### Notification #################################################
+
+    //##################################### Expense #################################################
+
+    app.post(globals.globvar.rootAPI + "/saveExpenseInfo", exp.saveExpenseInfo);
+    app.post(globals.globvar.rootAPI + "/getExpenseDetails", exp.getExpenseDetails);
+
+    //##################################### Expense #################################################
 
     //##################################### VIVEK ###############################################################
 
