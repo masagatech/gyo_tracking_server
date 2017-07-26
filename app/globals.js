@@ -21,7 +21,7 @@ global.constr = function constr() {
 
 global.monconstr = function constr() {
     //return 'postgres://postgres:123@192.168.1.107:5432/goyo_marketing';
-    return 'mongodb://127.0.0.1:27017/gototrack';
+    return 'mongodb://127.0.0.1:27017/goyotrack';
 };
 
 global.pgdbconnection = {
@@ -33,3 +33,13 @@ global.pgdbconnection = {
     max: 10, // max number of clients in the pool
     idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
 };
+
+// global.pgdbconnection = {
+//     user: 'postgres', //env var: PGUSER
+//     database: 'goyo_traveltrack', //env var: PGDATABASE
+//     password: 'sa@123', //env var: PGPASSWORD
+//     host: 'traveltrack.goyo.in', // Server hosting the postgres database
+//     port: 5432, //env var: PGPORT
+//     max: 10, // max number of clients in the pool
+//     idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
+// };
