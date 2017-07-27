@@ -123,6 +123,8 @@ var appRouter = function(app) {
             if (err) return console.log(err);
         });
 
+        tripapi.saveTripStops(req);
+
         src.on('end', function() {});
         src.on('error', function(err) { res.send({ error: "upload failed" }); });
     });

@@ -32,9 +32,13 @@ trip.stoptrip = function(req, res, done) {
 
 trip.saveTripStops = function saveTripStops(req, res, done) {
     db.callFunction("select " + globals.trackschema("funsave_tripstops") + "($1::json);", [req.body], function(data) {
-        rs.resp(res, 200, data.rows);
+        if (res) {
+            rs.resp(res, 200, data.rows);
+        }
     }, function(err) {
-        rs.resp(res, 401, "error : " + err);
+        if (res) {
+            rs.resp(res, 401, "error : " + err);
+        }
     })
 }
 
