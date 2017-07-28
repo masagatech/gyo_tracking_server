@@ -54,7 +54,7 @@ var appRouter = function(app) {
 
     //##################################### Reports #############################################################
 
-    app.post(globals.globvar.rootAPI + "/getGroupWiseEmployeeReports", reports.getGroupWiseEmployeeReports);
+    app.post(globals.globvar.rootAPI + "/getTeamWiseEmployeeReports", reports.getTeamWiseEmployeeReports);
 
     //##################################### Reports #############################################################
 
@@ -82,17 +82,19 @@ var appRouter = function(app) {
 
     //##################################### Team Ownership Mapping #################################################
 
-    //##################################### Allocate Task #################################################
+    //##################################### Task Allocate #################################################
 
-    app.post(globals.globvar.rootAPI + "/saveAllocateTask", task.saveAllocateTask);
-    app.post(globals.globvar.rootAPI + "/getAllocateTask", task.getAllocateTask);
+    app.post(globals.globvar.rootAPI + "/saveTaskAllocate", task.saveTaskAllocate);
+    app.post(globals.globvar.rootAPI + "/getTaskAllocate", task.getTaskAllocate);
 
-    //##################################### Nature Task #################################################
+    //##################################### Task Allocate #################################################
 
-    app.post(globals.globvar.rootAPI + "/saveNatureTask", task.saveNatureTask);
-    app.post(globals.globvar.rootAPI + "/getNatureTask", task.getNatureTask);
+    //##################################### Task Nature #################################################
 
-    //##################################### Allocate Task #################################################
+    app.post(globals.globvar.rootAPI + "/saveTaskNature", task.saveTaskNature);
+    app.post(globals.globvar.rootAPI + "/getTaskNature", task.getTaskNature);
+
+    //##################################### Task Nature #################################################
 
     //##################################### Notification #################################################
 
@@ -113,6 +115,7 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/mobileupload", upload.any(), function(req, res) {
         var tmp_path = req.files[0].path;
+        req.body.uploadimg = req.files[0].originalname;
         var target_path = 'www/mobile/' + req.files[0].originalname;
         var src = fs.createReadStream(tmp_path);
         var dest = fs.createWriteStream(target_path);
@@ -125,7 +128,8 @@ var appRouter = function(app) {
 
         tripapi.saveTripStops(req);
 
-        src.on('end', function() {});
+        // src.on('end', function() { status: "true" });
+        src.on('end', function() { res.send({ status: "true" }); });
         src.on('error', function(err) { res.send({ error: "upload failed" }); });
     });
 
