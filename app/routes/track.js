@@ -4,6 +4,7 @@ var fs = require('fs');
 var jwt = require('express-jwt');
 
 var emp = require("../appmodule/trackapi/employee.js");
+var empleave = require("../appmodule/trackapi/employeeleave.js");
 var tem = require("../appmodule/trackapi/teamempmap.js");
 var tom = require("../appmodule/trackapi/teamownermap.js");
 var task = require("../appmodule/trackapi/task.js");
@@ -65,6 +66,13 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/getEmployeeDetails", emp.getEmployeeDetails);
     app.get(globals.globvar.rootAPI + "/getEmpStatus", emp.getLastStatus);
+
+    //##################################### Employee #################################################
+
+    //##################################### Employee Leave #################################################
+
+    app.post(globals.globvar.rootAPI + "/saveLeaveEmployee", empleave.saveLeaveEmployee);
+    app.post(globals.globvar.rootAPI + "/getLeaveEmployee", empleave.getLeaveEmployee);
 
     //##################################### Employee #################################################
 
