@@ -74,7 +74,7 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/saveLeaveEmployee", empleave.saveLeaveEmployee);
     app.post(globals.globvar.rootAPI + "/getLeaveEmployee", empleave.getLeaveEmployee);
 
-    //##################################### Employee #################################################
+    //##################################### Employee Leave #################################################
 
     //##################################### Team Employee Mapping ##############################################
 
@@ -114,6 +114,7 @@ var appRouter = function(app) {
     //##################################### Expense #################################################
 
     app.post(globals.globvar.rootAPI + "/saveExpenseInfo", exp.saveExpenseInfo);
+    app.post(globals.globvar.rootAPI + "/saveExpenseDetails", exp.saveExpenseDetails);
     app.post(globals.globvar.rootAPI + "/getExpenseDetails", exp.getExpenseDetails);
 
     //##################################### Expense #################################################
