@@ -44,11 +44,11 @@ var LastUpdateVehSchema = new Schema({
     speed: Number,
     bearing: Number,
     appvr: String,
-    uid: String,
+    uid: { type: Number, index: true },
     pdid: Number,
     btr: String,
     alwspeed: Number,
-    vhid: { type: Number, index: true },
+    vhid: Number,
     flag: String
 });
 
@@ -92,6 +92,7 @@ tripsinfo.createtripdetails = function(req, res, done) {
                         "tripid": req.body.tripid,
                         "sertm": req.body.sertm,
                         "btr": req.body.btr,
+                        "uid": req.body.uid,
                         "vhid": req.body.vhid
                     };
 
@@ -108,6 +109,7 @@ tripsinfo.createtripdetails = function(req, res, done) {
                                     "speed": parseInt(req.body.speed),
                                     "maxspeed": req.body.alwspeed,
                                     "entt": req.body.entt,
+                                    "uid": req.body.uid,
                                     "vhid": req.body.vhid,
                                     "details": _speeddata
                                 }
@@ -124,8 +126,8 @@ tripsinfo.createtripdetails = function(req, res, done) {
                     tripsinfo.updateData(req.body);
 
                     //send data to socket listner    
-                    socketserver.io.sockets.in(req.body.tripid).emit('msgd', { "evt": "data", "data": _speeddata });
-                    socketserver.io.sockets.in(req.body.vhid).emit('msgd', { "evt": "data", "data": _speeddata });
+                    //socketserver.io.sockets.in(req.body.tripid).emit('msgd', { "evt": "data", "data": _speeddata });
+                    socketserver.io.sockets.in(req.body.uid).emit('msgd', { "evt": "data", "data": _speeddata });
 
 
                 } catch (e) {
@@ -143,7 +145,7 @@ tripsinfo.createtripdetails = function(req, res, done) {
     //update single record for vehicle last update state
 tripsinfo.updateData = function(data) {
     // console.log(data);
-    mondb.mongoose.model('vhups').findOneAndUpdate({ 'vhid': data.vhid }, data, { upsert: true }, function(err, data) {
+    mondb.mongoose.model('vhups').findOneAndUpdate({ 'uid': data.uid }, data, { upsert: true }, function(err, data) {
         if (err) {
             //console.log(err);
 
@@ -198,7 +200,7 @@ tripsinfo.gettripdelta = function(req, res, done) {
 
 
 tripsinfo.getvhupdtes = function(req, res, done) {
-    var d = mondb.mongoose.model('vhups').find({ 'vhid': { $in: req.body.vhids } }).select('vhid tripid loc bearing sertm alwspeed speed btr flag');
+    var d = mondb.mongoose.model('vhups').find({ 'uid': { $in: req.body.empids } }).select('uid vhid tripid loc bearing sertm alwspeed speed btr flag');
     d.exec(function(err, data) {
         if (err) {
             rs.resp(res, 400, err);

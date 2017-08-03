@@ -24,9 +24,6 @@ var reports = require("../appmodule/schoolapi/reports.js");
 var dashboard = require("../appmodule/schoolapi/dashboard.js");
 var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
 
-var tripsinfo = require("../appmodule/z_apitrips/tripsinfo.js");
-var trackboard = require("../appmodule/schoolapi/trackboard.js");
-
 var multer = require('multer');
 
 var upload = multer({
@@ -56,9 +53,6 @@ var appRouter = function(app) {
 
 
     //##################################### VIVEK ##############################################################
-
-    app.post(globals.globvar.rootAPI + "/tripapi/getvahicleupdates", tripsinfo.getvhupdtes);
-    app.post(globals.globvar.rootAPI + "/tripapi/gettrackboard", trackboard.gettrackboard);
 
     //##################################### Login ##############################################################
 
