@@ -59,6 +59,7 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getLogin", login.getLogin);
     app.post(globals.globvar.rootAPI + "/getLogout", login.getLogout);
     app.post(globals.globvar.rootAPI + "/savePassword", login.savePassword);
+    app.post(globals.globvar.rootAPI + "/getUserLoginLog", login.getUserLoginLog);
 
     //##################################### Login ##############################################################
 
@@ -74,12 +75,13 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getWorkspaceDetails", workspace.getWorkspaceDetails);
     app.post(globals.globvar.rootAPI + "/saveWorkspaceInfo", workspace.saveWorkspaceInfo);
 
-    //##################################### Login ##############################################################
+    //##################################### Workspace ##############################################################
 
     //##################################### Menu ###############################################################
 
     app.post(globals.globvar.rootAPI + "/getMenuDetails", menu.getMenuDetails);
     app.post(globals.globvar.rootAPI + "/getMenuAccess", menu.getMenuAccess);
+    app.post(globals.globvar.rootAPI + "/getMenuLog", menu.getMenuLog);
 
     //##################################### Menu ###############################################################
 
