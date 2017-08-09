@@ -30,7 +30,7 @@ trip.getcrews = function(req, res, done) {
 trip.starttrip = function(req, res, done) {
     req.body.mode = "start";
 
-    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function(data) {
+    db.callFunction("select " + globals.trackschema("funsave_api_startstoptrip") + "($1::json);", [req.body], function(data) {
         var _d = data.rows[0].funsave_api_startstoptrip;
         rs.resp(res, 200, _d);
 
@@ -66,7 +66,7 @@ trip.starttrip = function(req, res, done) {
 trip.stoptrip = function(req, res, done) {
     req.body.mode = "stop";
 
-    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function(data) {
+    db.callFunction("select " + globals.trackschema("funsave_api_startstoptrip") + "($1::json);", [req.body], function(data) {
         var _d = data.rows[0].funsave_api_startstoptrip;
         rs.resp(res, 200, _d);
 
