@@ -9,7 +9,8 @@ var tem = require("../appmodule/trackapi/teamempmap.js");
 var tom = require("../appmodule/trackapi/teamownermap.js");
 var task = require("../appmodule/trackapi/task.js");
 var ntf = require("../appmodule/trackapi/notification.js");
-var exp = require("../appmodule/trackapi/expense.js");
+var expense = require("../appmodule/trackapi/expense.js");
+var voucher = require("../appmodule/trackapi/voucher.js");
 var reports = require("../appmodule/trackapi/reports.js");
 
 var team = require("../appmodule/trackapi/team.js");
@@ -113,11 +114,18 @@ var appRouter = function(app) {
 
     //##################################### Expense #################################################
 
-    app.post(globals.globvar.rootAPI + "/saveExpenseInfo", exp.saveExpenseInfo);
-    app.post(globals.globvar.rootAPI + "/saveExpenseDetails", exp.saveExpenseDetails);
-    app.post(globals.globvar.rootAPI + "/getExpenseDetails", exp.getExpenseDetails);
+    app.post(globals.globvar.rootAPI + "/saveExpenseInfo", expense.saveExpenseInfo);
+    app.post(globals.globvar.rootAPI + "/saveExpenseDetails", expense.saveExpenseDetails);
+    app.post(globals.globvar.rootAPI + "/getExpenseDetails", expense.getExpenseDetails);
 
     //##################################### Expense #################################################
+
+    //##################################### Voucher #################################################
+
+    app.post(globals.globvar.rootAPI + "/saveVoucherInfo", voucher.saveVoucherInfo);
+    app.post(globals.globvar.rootAPI + "/getVoucherDetails", voucher.getVoucherDetails);
+
+    //##################################### Voucher #################################################
 
     //##################################### File Uploads #########################################################
     // app.post(globals.globvar.rootAPI + "/mobileupload", upload.any(), mobile.uploadFile);
