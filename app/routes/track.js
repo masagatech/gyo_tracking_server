@@ -43,19 +43,23 @@ var appRouter = function(app) {
         rs.resp(res, 200, APIInfo);
     });
 
-    //##################################### API Details / ######################################################
+    //##################################### VIVEK ###############################################################
+
+    //##################################### API Details / #######################################################
+
+    //##################################### TRIP API ############################################################
+
     app.post(globals.globvar.rootAPI + "/tripapi/start", tripapi.starttrip);
     app.post(globals.globvar.rootAPI + "/tripapi/stop", tripapi.stoptrip);
 
     app.post(globals.globvar.rootAPI + "/saveTripStops", tripapi.saveTripStops);
     app.post(globals.globvar.rootAPI + "/getTripStops", tripapi.getTripStops);
-    app.post(globals.globvar.rootAPI + "/getTripReports", tripapi.getTripReports);
 
-    //##################################### VIVEK ##############################################################
-
+    //##################################### TRIP API ############################################################
 
     //##################################### Reports #############################################################
 
+    app.post(globals.globvar.rootAPI + "/getTripReports", tripapi.getTripReports);
     app.post(globals.globvar.rootAPI + "/getTeamWiseEmployeeReports", reports.getTeamWiseEmployeeReports);
 
     //##################################### Reports #############################################################
@@ -127,7 +131,29 @@ var appRouter = function(app) {
 
     //##################################### Voucher #################################################
 
+    //##################################### Team ###############################################################
+
+    app.post(globals.globvar.rootAPI + "/saveTeamInfo", team.saveTeamInfo);
+    app.post(globals.globvar.rootAPI + "/getTeamDetails", team.getTeamDetails);
+
+    //##################################### Team ###############################################################
+
+    //##################################### Tag ###############################################################
+
+    app.post(globals.globvar.rootAPI + "/saveTagInfo", tag.saveTagInfo);
+    app.post(globals.globvar.rootAPI + "/getTagDetails", tag.getTagDetails);
+
+    app.post(globals.globvar.rootAPI + "/savePushTagInfo", tag.savePushTagInfo);
+    app.post(globals.globvar.rootAPI + "/getPushTagDetails", tag.getPushTagDetails);
+
+    //##################################### mobile ###############################################################
+
+    app.post(globals.globvar.rootAPI + "/livebeats", mobile.livebeats);
+
+    //##################################### mobile ############################################################
+
     //##################################### File Uploads #########################################################
+
     // app.post(globals.globvar.rootAPI + "/mobileupload", upload.any(), mobile.uploadFile);
 
     app.post(globals.globvar.rootAPI + "/mobileupload", upload.any(), function(req, res) {
@@ -153,28 +179,6 @@ var appRouter = function(app) {
     //##################################### File Uploads #########################################################
 
     //##################################### VIVEK ###############################################################
-
-
-    //##################################### Harshala ############################################################
-
-    //##################################### Team ###############################################################
-
-    app.post(globals.globvar.rootAPI + "/saveTeamInfo", team.saveTeamInfo);
-    app.post(globals.globvar.rootAPI + "/getTeamDetails", team.getTeamDetails);
-
-    //##################################### Team ###############################################################
-
-    //##################################### Tag ###############################################################
-
-    app.post(globals.globvar.rootAPI + "/saveTagInfo", tag.saveTagInfo);
-    app.post(globals.globvar.rootAPI + "/getTagDetails", tag.getTagDetails);
-
-    app.post(globals.globvar.rootAPI + "/savePushTagInfo", tag.savePushTagInfo);
-    app.post(globals.globvar.rootAPI + "/getPushTagDetails", tag.getPushTagDetails);
-
-    //##################################### mobile ###############################################################
-    app.post(globals.globvar.rootAPI + "/livebeats", mobile.livebeats);
-    //##################################### Harshala ############################################################
 }
 
 module.exports = appRouter;

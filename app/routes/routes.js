@@ -50,6 +50,13 @@ var appRouter = function(app) {
 
     //##################################### VIVEK ##############################################################
 
+    //##################################### File Upload ########################################################
+
+    app.post(globals.globvar.rootAPI + "/uploads", fileupload.uploadFile);
+    // app.get(globals.globvar.rootAPI + "/getFilePath", fileupload.getFilePath);
+
+    //##################################### File Upload ########################################################
+
     //##################################### Login ##############################################################
 
     app.post(globals.globvar.rootAPI + "/getLogin", login.getLogin);
@@ -57,13 +64,6 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/savePassword", login.savePassword);
 
     //##################################### Login ##############################################################
-
-    //##################################### File Upload ########################################################
-
-    app.post(globals.globvar.rootAPI + "/uploads", fileupload.uploadFile);
-    // app.get(globals.globvar.rootAPI + "/getFilePath", fileupload.getFilePath);
-
-    //##################################### File Upload ########################################################
 
     //##################################### Workspace ##########################################################
 
