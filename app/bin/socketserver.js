@@ -27,10 +27,21 @@ socketserver.start = function() {
 
         });
 
-         client.on('unregister', function(msg) {
+        client.on('unregister', function(msg) {
             // client.
             client.leave(msg);
             client.emit("msgd", { "evt": "unregistered", "tripid": msg });
+
+        });
+
+        client.on('reg_v', function(msg) {
+            // client.
+            let vhids = msg.split(',');
+            for (var i = 0; i < vhids.length; i++) {
+                let el = vhids[i];
+                client.join(el);
+            }
+            client.emit("msgd", { "evt": "registered", "empids": msg });
 
         });
 
