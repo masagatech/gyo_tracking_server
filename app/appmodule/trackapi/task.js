@@ -35,3 +35,11 @@ task.getTaskNature = function getTaskNature(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+task.getTaskReports = function getTaskReports(req, res, done) {
+    db.callProcedure("select " + globals.trackschema("funget_rpt_taskdetails") + "($1,$2::json);", ['rptta', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}

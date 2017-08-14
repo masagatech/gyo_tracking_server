@@ -99,6 +99,7 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/saveTaskAllocate", task.saveTaskAllocate);
     app.post(globals.globvar.rootAPI + "/getTaskAllocate", task.getTaskAllocate);
+    app.post(globals.globvar.rootAPI + "/getTaskReports", task.getTaskReports);
 
     //##################################### Task Allocate #################################################
 
