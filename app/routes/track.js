@@ -76,8 +76,10 @@ var appRouter = function(app) {
 
     //##################################### Employee Leave #################################################
 
-    app.post(globals.globvar.rootAPI + "/saveLeaveEmployee", empleave.saveLeaveEmployee);
-    app.post(globals.globvar.rootAPI + "/getLeaveEmployee", empleave.getLeaveEmployee);
+    app.post(globals.globvar.rootAPI + "/saveEmployeeLeave", empleave.saveEmployeeLeave);
+    app.post(globals.globvar.rootAPI + "/getEmployeeLeave", empleave.getEmployeeLeave);
+    app.post(globals.globvar.rootAPI + "/saveEmployeeLeaveApproval", empleave.saveEmployeeLeaveApproval);
+    app.post(globals.globvar.rootAPI + "/getEmployeeLeaveReports", empleave.getEmployeeLeaveReports);
 
     //##################################### Employee Leave #################################################
 
@@ -122,6 +124,7 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/saveExpenseInfo", expense.saveExpenseInfo);
     app.post(globals.globvar.rootAPI + "/saveExpenseDetails", expense.saveExpenseDetails);
     app.post(globals.globvar.rootAPI + "/getExpenseDetails", expense.getExpenseDetails);
+    app.post(globals.globvar.rootAPI + "/getExpenseReports", expense.getExpenseReports);
 
     //##################################### Expense #################################################
 
@@ -129,6 +132,7 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/saveVoucherInfo", voucher.saveVoucherInfo);
     app.post(globals.globvar.rootAPI + "/getVoucherDetails", voucher.getVoucherDetails);
+    app.post(globals.globvar.rootAPI + "/saveVoucherApproval", voucher.saveVoucherApproval);
 
     //##################################### Voucher #################################################
 

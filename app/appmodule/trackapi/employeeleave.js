@@ -4,7 +4,7 @@ var globals = require("gen").globals;
 
 var empleave = module.exports = {};
 
-empleave.saveLeaveEmployee = function saveLeaveEmployee(req, res, done) {
+empleave.saveEmployeeLeave = function saveEmployeeLeave(req, res, done) {
     db.callFunction("select " + globals.trackschema("funsave_employeeleave") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
@@ -12,8 +12,24 @@ empleave.saveLeaveEmployee = function saveLeaveEmployee(req, res, done) {
     })
 }
 
-empleave.getLeaveEmployee = function getLeaveEmployee(req, res, done) {
+empleave.getEmployeeLeave = function getEmployeeLeave(req, res, done) {
     db.callProcedure("select " + globals.trackschema("funget_employeeleave") + "($1,$2::json);", ['el', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}
+
+empleave.saveEmployeeLeaveApproval = function saveEmployeeLeaveApproval(req, res, done) {
+    db.callFunction("select " + globals.trackschema("funsave_empleaveapproval") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
+
+empleave.getEmployeeLeaveReports = function getEmployeeLeaveReports(req, res, done) {
+    db.callProcedure("select " + globals.trackschema("funget_rpt_empleavedetails") + "($1,$2::json);", ['el', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

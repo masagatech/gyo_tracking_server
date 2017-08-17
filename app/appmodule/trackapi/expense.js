@@ -27,3 +27,11 @@ exp.getExpenseDetails = function getExpenseDetails(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+exp.getExpenseReports = function getExpenseReports(req, res, done) {
+    db.callProcedure("select " + globals.trackschema("funget_rpt_expensedetails") + "($1,$2::json);", ['exprpt', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}
