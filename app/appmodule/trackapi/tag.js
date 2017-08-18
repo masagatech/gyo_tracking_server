@@ -24,16 +24,16 @@ tag.getTagDetails = function getTagDetails(req, res, done) {
 
 // Push Tag
 
-tag.savePushTagInfo = function savePushTagInfo(req, res, done) {
-    db.callFunction("select " + globals.trackschema("funsave_tagpushinfo") + "($1::json);", [req.body], function(data) {
+tag.saveTagEmployeeMap = function saveTagEmployeeMap(req, res, done) {
+    db.callFunction("select " + globals.trackschema("funsave_tagempmap") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })
 }
 
-tag.getPushTagDetails = function getPushTagDetails(req, res, done) {
-    db.callProcedure("select " + globals.trackschema("funget_tagpushdetails") + "($1,$2::json);", ['tag', req.body], function(data) {
+tag.getTagEmployeeMap = function getTagEmployeeMap(req, res, done) {
+    db.callProcedure("select " + globals.trackschema("funget_tagempmap") + "($1,$2::json);", ['tag', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

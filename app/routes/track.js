@@ -61,6 +61,7 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/getTripReports", tripapi.getTripReports);
     app.post(globals.globvar.rootAPI + "/getTeamWiseEmployeeReports", reports.getTeamWiseEmployeeReports);
+    app.post(globals.globvar.rootAPI + "/getEmployeeAttendance", reports.getEmployeeAttendance);
 
     //##################################### Reports #############################################################
 
@@ -148,8 +149,8 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/saveTagInfo", tag.saveTagInfo);
     app.post(globals.globvar.rootAPI + "/getTagDetails", tag.getTagDetails);
 
-    app.post(globals.globvar.rootAPI + "/savePushTagInfo", tag.savePushTagInfo);
-    app.post(globals.globvar.rootAPI + "/getPushTagDetails", tag.getPushTagDetails);
+    app.post(globals.globvar.rootAPI + "/saveTagEmployeeMap", tag.saveTagEmployeeMap);
+    app.post(globals.globvar.rootAPI + "/getTagEmployeeMap", tag.getTagEmployeeMap);
 
     //##################################### mobile ###############################################################
 
