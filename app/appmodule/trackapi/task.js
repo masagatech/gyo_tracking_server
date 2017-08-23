@@ -16,6 +16,8 @@ task.saveTaskAllocate = function saveTaskAllocate(req, res, done) {
             "empid": req.body.empid
         }
 
+        console.log(_dtr);
+
         tripapi.sendNotification(_dtr);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

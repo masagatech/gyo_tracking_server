@@ -10,7 +10,7 @@ notification.saveNotification = function saveNotification(req, res, done) {
         rs.resp(res, 200, data.rows);
 
         var _dtr = {
-            "flag": "multiempnotify",
+            "flag": "tracknotify",
             "title": req.body.title,
             "body": req.body.msg,
             "empid": req.body.empid

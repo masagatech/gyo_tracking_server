@@ -26,10 +26,11 @@ empleave.saveEmployeeLeaveApproval = function saveEmployeeLeaveApproval(req, res
         rs.resp(res, 200, data.rows);
 
         var _dtr = {
-            "flag": "empnotify",
+            "flag": "emplvnotify",
             "title": req.body.lvtype,
             "body": req.body.apprremark,
-            "empid": req.body.empid
+            "empid": req.body.empid,
+            "status": req.body.status
         }
 
         tripapi.sendNotification(_dtr);
