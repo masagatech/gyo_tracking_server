@@ -11,9 +11,9 @@ task.saveTaskAllocate = function saveTaskAllocate(req, res, done) {
 
         var _dtr = {
             "flag": "tracknotify",
-            "title": req.body.tsktitle,
-            "body": req.body.tskdesc,
-            "empid": req.body.empid
+            "title": data.rows[0].funsave_taskallocate.title,
+            "body": data.rows[0].funsave_taskallocate.msg,
+            "empid": data.rows[0].funsave_taskallocate.ntfempid
         }
 
         console.log(_dtr);

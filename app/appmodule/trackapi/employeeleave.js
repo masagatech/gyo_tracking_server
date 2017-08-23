@@ -4,6 +4,7 @@ var globals = require("gen").globals;
 
 var empleave = module.exports = {};
 var tripapi = require("../schoolapi/tripapi.js");
+var notification = require("../trackapi/notification.js");
 
 empleave.saveEmployeeLeave = function saveEmployeeLeave(req, res, done) {
     db.callFunction("select " + globals.trackschema("funsave_employeeleave") + "($1::json);", [req.body], function(data) {
@@ -26,12 +27,13 @@ empleave.saveEmployeeLeaveApproval = function saveEmployeeLeaveApproval(req, res
         rs.resp(res, 200, data.rows);
 
         var _dtr = {
-            "flag": "emplvnotify",
-            "title": req.body.lvtype,
-            "body": req.body.apprremark,
-            "empid": req.body.empid,
-            "status": req.body.status
+            "flag": "tracknotify",
+            "title": data.rows[0].funsave_empleaveapproval.title,
+            "body": data.rows[0].funsave_empleaveapproval.msg,
+            "empid": data.rows[0].funsave_empleaveapproval.ntfempid
         }
+
+        console.log(_dtr);
 
         tripapi.sendNotification(_dtr);
     }, function(err) {
