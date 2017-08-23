@@ -3,7 +3,6 @@ var rs = require("gen").res;
 var globals = require("gen").globals;
 
 var notification = module.exports = {};
-
 var tripapi = require("../schoolapi/tripapi.js");
 
 notification.saveNotification = function saveNotification(req, res, done) {
@@ -11,7 +10,7 @@ notification.saveNotification = function saveNotification(req, res, done) {
         rs.resp(res, 200, data.rows);
 
         var _dtr = {
-            "flag": "tracknotify",
+            "flag": "multiempnotify",
             "title": req.body.title,
             "body": req.body.msg,
             "empid": req.body.empid

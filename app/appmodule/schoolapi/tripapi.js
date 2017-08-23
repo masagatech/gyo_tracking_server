@@ -72,6 +72,7 @@ trip.stoptrip = function(req, res, done) {
 
         if (_d.resstatus) {
             var sendData = req.body;
+
             sendData["flag"] = "stoptrip";
             sendData["type"] = "driver_tracking";
             sendData["subtype"] = "start_trip";
@@ -105,7 +106,6 @@ trip.picdrpcrew = function(req, res, done) {
                 } else {
                     trip.senddropalert(sendData); //for dropped
                 }
-
             } else if (sendData.status === '2') // for absent 
             {
                 trip.sendabsentalert(sendData);
@@ -166,6 +166,7 @@ trip.sendreachingalert = function(req, res, done) {
 }
 
 // sending FCM notification
+
 var fcm = require("gen").fcm();
 
 trip.sendNotification = function(_data, res) {
@@ -186,15 +187,16 @@ trip.sendNotification = function(_data, res) {
                             var _d = {
                                 "status": false
                             };
+
                             rs.resp(res, 200, _d);
                             return;
                         } else {
                             var _d = {
                                 "status": true
                             };
+
                             rs.resp(res, 200, _d);
                         }
-
                     }
                 }
 
@@ -219,23 +221,17 @@ trip.sendNotification = function(_data, res) {
                     "priority": "HIGH",
                     "time_to_live": (60 * 15)
                 };
+
                 fcm.send(message, function(err, response) {
-
                     if (err) {
-
                         console.log("Something has gone wrong! ", err);
-
                     } else {
                         console.log("Successfully sent with response: ", response);
-
                     }
                 });
-
-
             } catch (error) {
                 console.log(error);
             }
-
         },
 
         function(err) {
