@@ -37,6 +37,7 @@ socketserver.start = function() {
         client.on('reg_v', function(msg) {
             // client.
             let vhids = msg.split(',');
+
             for (var i = 0; i < vhids.length; i++) {
                 let el = vhids[i];
                 client.join(el);

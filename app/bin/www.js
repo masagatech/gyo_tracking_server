@@ -76,6 +76,7 @@ var track = require("../routes/track.js")(app);
 // If no route is matched by now, it must be a 404
 
 app.use(function(req, res, next) {
+    console.log(req.url);
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
