@@ -9,6 +9,7 @@ var tem = require("../appmodule/trackapi/teamempmap.js");
 var tom = require("../appmodule/trackapi/teamownermap.js");
 var task = require("../appmodule/trackapi/task.js");
 var ntf = require("../appmodule/trackapi/notification.js");
+var contact = require("../appmodule/trackapi/contactus.js");
 var expense = require("../appmodule/trackapi/expense.js");
 var voucher = require("../appmodule/trackapi/voucher.js");
 var reports = require("../appmodule/trackapi/reports.js");
@@ -117,6 +118,13 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/saveNotification", ntf.saveNotification);
     app.post(globals.globvar.rootAPI + "/getNotification", ntf.getNotification);
+
+    //##################################### Notification #################################################
+
+    //##################################### Contact Us #################################################
+
+    app.post(globals.globvar.rootAPI + "/saveContactUs", contact.saveContactUs);
+    app.post(globals.globvar.rootAPI + "/getContactUs", contact.getContactUs);
 
     //##################################### Notification #################################################
 
