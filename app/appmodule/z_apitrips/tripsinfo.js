@@ -26,10 +26,11 @@ var LocationSchema = new Schema({
     pdid: Number,
     btr: String,
     alwspeed: Number,
-    vhid: Number,
     flag: String,
     accr: Number,
-    alt: Number
+    alt: Number,
+    gpstm:String,
+    actvt:String
 });
 
 
@@ -50,10 +51,11 @@ var LastUpdateVehSchema = new Schema({
     pdid: Number,
     btr: String,
     alwspeed: Number,
-    vhid: Number,
     flag: String,
     accr: Number,
-    alt: Number
+    alt: Number,
+    gpstm:String,
+    actvt:String
 });
 
 
@@ -86,7 +88,34 @@ tripsinfo.createtripdetails = function(req, res, done) {
                 }
                 try {
                     // console.log(req.body);
-                    var _speeddata = {
+                    // try {
+                    //     if (parseInt(req.body.alwspeed) > 0 && parseInt(req.body.speed) > parseInt(req.body.alwspeed)) //entry if speed is greater than allowd
+                    //     {
+                    //         //save if the speed voilate
+                    //         speedCapture.saveSpeedVialation({
+                    //             body: {
+                    //                 "tripid": req.body.tripid,
+                    //                 "pdid": req.body.pdid,
+                    //                 "drvid": req.body.drvid,
+                    //                 "speed": parseInt(req.body.speed),
+                    //                 "maxspeed": req.body.alwspeed,
+                    //                 "entt": req.body.entt,
+                    //                 "uid": req.body.uid,
+                    //                 "vhid": req.body.vhid,
+                    //                 "details": _speeddata
+                    //             }
+                    //         })
+                    //     }
+
+
+
+                    // } catch (error) {
+                    //     console,
+                    //     log("tripsinfo : 81 :", error)
+                    // }
+
+                    tripsinfo.updateData(req.body);
+                    var _data = {
                         "lat": loc[1],
                         "lon": loc[0],
                         "loc": loc,
@@ -97,44 +126,14 @@ tripsinfo.createtripdetails = function(req, res, done) {
                         "sertm": req.body.sertm,
                         "btr": req.body.btr,
                         "uid": req.body.uid,
-                        "vhid": req.body.vhid,
                         "accr": (req.body.accr || 0),
                         "alt": (req.body.alt || 0),
-                        "flag": req.body.flag || 'inprog'
+                        "flag": req.body.flag || 'inprog',
+                        "gpstm":req.body.gpsdt,
+                        "actvt":req.body.actvt
                     };
-
-
-                    try {
-                        if (parseInt(req.body.alwspeed) > 0 && parseInt(req.body.speed) > parseInt(req.body.alwspeed)) //entry if speed is greater than allowd
-                        {
-                            //save if the speed voilate
-                            speedCapture.saveSpeedVialation({
-                                body: {
-                                    "tripid": req.body.tripid,
-                                    "pdid": req.body.pdid,
-                                    "drvid": req.body.drvid,
-                                    "speed": parseInt(req.body.speed),
-                                    "maxspeed": req.body.alwspeed,
-                                    "entt": req.body.entt,
-                                    "uid": req.body.uid,
-                                    "vhid": req.body.vhid,
-                                    "details": _speeddata
-                                }
-                            })
-                        }
-
-
-
-                    } catch (error) {
-                        console,
-                        log("tripsinfo : 81 :", error)
-                    }
-
-                    tripsinfo.updateData(req.body);
-
                     //send data to socket listner    
-                    //socketserver.io.sockets.in(req.body.tripid).emit('msgd', { "evt": "data", "data": _speeddata });
-                    socketserver.io.sockets.in(req.body.uid).emit('msgd', { "evt": "data", "data": _speeddata });
+                    socketserver.io.sockets.in(req.body.uid).emit('msgd', { "evt": "data", "data": _data });
 
 
                 } catch (e) {
@@ -148,7 +147,7 @@ tripsinfo.createtripdetails = function(req, res, done) {
             }
             //console.error(ex.message);
         }
-    }
+    }   
     //update single record for vehicle last update state
 tripsinfo.updateData = function(data) {
     // console.log(data);
@@ -187,8 +186,7 @@ tripsinfo.stop = function(data1) {
         "flag": "stop"
     };
 
-    socketserver.io.sockets.in(data.tripid).emit('msgd', { "evt": "stop", "data": data });
-    socketserver.io.sockets.in(data.vhid).emit('msgd', { "evt": "stop", "data": data });
+    socketserver.io.sockets.in(data.uid).emit('msgd', { "evt": "stop", "data": data });
 }
 
 
@@ -207,7 +205,7 @@ tripsinfo.gettripdelta = function(req, res, done) {
 
 
 tripsinfo.getvhupdtes = function(req, res, done) {
-    var d = mondb.mongoose.model('vhups').find({ 'uid': { $in: req.body.empids } }).select('uid vhid tripid loc bearing sertm alwspeed speed btr flag');
+    var d = mondb.mongoose.model('vhups').find({ 'uid': { $in: req.body.empids } }).select('uid tripid loc bearing sertm alwspeed speed btr flag');
     d.exec(function(err, data) {
         if (err) {
             rs.resp(res, 400, err);
