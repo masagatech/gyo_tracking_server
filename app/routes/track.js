@@ -183,11 +183,14 @@ var appRouter = function(app) {
             if (err) return console.log(err);
         });
 
-        tripapi.saveTripStops(req);
-
         // src.on('end', function() { status: "true" });
-        src.on('end', function() { res.send({ status: "true" }); });
-        src.on('error', function(err) { res.send({ error: "upload failed" }); });
+        src.on('end', function() {
+            tripapi.saveTripStops(req, res);
+            // res.send({ status: "true" });
+        });
+        src.on('error', function(err) {
+            res.send({ error: "upload failed" });
+        });
     });
 
     //##################################### File Uploads #########################################################
