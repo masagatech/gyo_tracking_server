@@ -29,8 +29,8 @@ var LocationSchema = new Schema({
     flag: String,
     accr: Number,
     alt: Number,
-    gpstm:String,
-    actvt:String
+    gpstm: String,
+    actvt: String
 });
 
 
@@ -54,8 +54,8 @@ var LastUpdateVehSchema = new Schema({
     flag: String,
     accr: Number,
     alt: Number,
-    gpstm:String,
-    actvt:String
+    gpstm: String,
+    actvt: String
 });
 
 
@@ -76,45 +76,19 @@ tripsinfo.createtripdetails = function(req, res, done) {
 
             mondb.mongoose.model('trps').create(req.body, function(err, data) {
                 if (err) {
-                    //console.log(err);
                     if (res) {
                         rs.resp(res, 400, err);
                     }
+
                     return;
                 }
-                //console.log(data);
+
                 if (res) {
                     rs.resp(res, 200, data._id);
                 }
                 try {
-                    // console.log(req.body);
-                    // try {
-                    //     if (parseInt(req.body.alwspeed) > 0 && parseInt(req.body.speed) > parseInt(req.body.alwspeed)) //entry if speed is greater than allowd
-                    //     {
-                    //         //save if the speed voilate
-                    //         speedCapture.saveSpeedVialation({
-                    //             body: {
-                    //                 "tripid": req.body.tripid,
-                    //                 "pdid": req.body.pdid,
-                    //                 "drvid": req.body.drvid,
-                    //                 "speed": parseInt(req.body.speed),
-                    //                 "maxspeed": req.body.alwspeed,
-                    //                 "entt": req.body.entt,
-                    //                 "uid": req.body.uid,
-                    //                 "vhid": req.body.vhid,
-                    //                 "details": _speeddata
-                    //             }
-                    //         })
-                    //     }
-
-
-
-                    // } catch (error) {
-                    //     console,
-                    //     log("tripsinfo : 81 :", error)
-                    // }
-
                     tripsinfo.updateData(req.body);
+
                     var _data = {
                         "lat": loc[1],
                         "lon": loc[0],
@@ -129,8 +103,8 @@ tripsinfo.createtripdetails = function(req, res, done) {
                         "accr": (req.body.accr || 0),
                         "alt": (req.body.alt || 0),
                         "flag": req.body.flag || 'inprog',
-                        "gpstm":req.body.gpsdt,
-                        "actvt":req.body.actvt
+                        "gpstm": req.body.gpsdt,
+                        "actvt": req.body.actvt
                     };
                     //send data to socket listner    
                     socketserver.io.sockets.in(req.body.uid).emit('msgd', { "evt": "data", "data": _data });
@@ -147,7 +121,7 @@ tripsinfo.createtripdetails = function(req, res, done) {
             }
             //console.error(ex.message);
         }
-    }   
+    }
     //update single record for vehicle last update state
 tripsinfo.updateData = function(data) {
     // console.log(data);
